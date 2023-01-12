@@ -35,6 +35,7 @@ dependencies {
     testImplementation("io.projectreactor:reactor-test")
 
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.86.Final")
+    implementation("com.google.firebase:firebase-admin:9.1.1")
 }
 
 tasks.withType<KotlinCompile> {
