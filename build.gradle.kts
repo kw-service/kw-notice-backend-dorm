@@ -33,9 +33,11 @@ dependencies {
     testImplementation("io.mockk:mockk:1.13.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
+    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
 
-    implementation("io.netty:netty-resolver-dns-native-macos:4.1.86.Final")
+    implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
     implementation("com.google.firebase:firebase-admin:9.1.1")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
 }
 
 tasks.withType<KotlinCompile> {
@@ -48,3 +50,4 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
