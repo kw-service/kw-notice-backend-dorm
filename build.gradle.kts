@@ -1,5 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+java.sourceCompatibility = JavaVersion.VERSION_17
+
 plugins {
     id("org.springframework.boot") version "3.0.1"
     id("io.spring.dependency-management") version "1.1.0"
@@ -7,12 +9,32 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
 }
 
-group = "com.knet"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
+allprojects {
+    apply{
+        plugin("kotlin")
+        plugin("org.jetbrains.kotlin.jvm")
+        plugin("org.springframework.boot")
+        plugin("io.spring.dependency-management")
+        plugin("org.jetbrains.kotlin.plugin.spring") // allOpen 2
+    }
 
-repositories {
-    mavenCentral()
+    group = "com.knet"
+    version = "0.0.1-SNAPSHOT"
+
+    repositories {
+        mavenCentral()
+    }
+
+    tasks.withType<KotlinCompile> {
+        kotlinOptions {
+            freeCompilerArgs = listOf("-Xjsr305=strict")
+            jvmTarget = "17"
+        }
+    }
+
+    tasks.withType<Test> {
+        useJUnitPlatform()
+    }
 }
 
 dependencies {
@@ -21,13 +43,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
+    implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     runtimeOnly("com.mysql:mysql-connector-j")
+    implementation("mysql:mysql-connector-java:8.0.30")
     implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
     implementation("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
+
 
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
     testImplementation("io.mockk:mockk:1.13.2")
@@ -38,16 +61,7 @@ dependencies {
     implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
     implementation("com.google.firebase:firebase-admin:9.1.1")
     implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-}
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "17"
-    }
+    implementation("org.springframework.boot:spring-boot-starter-web:3.0.1")
+    implementation("org.springframework.boot:spring-boot-starter-batch:3.0.1")
 }
-
-tasks.withType<Test> {
-    useJUnitPlatform()
-}
-

@@ -36,7 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
-src/main/resources/application-test.yml
-src/main/resources/application-dev.yml
+### application database, system setting ###
+**/application-*.yml
 
+### firebase secret key ###
 dormitory-notice-firebase-adminsdk.json
