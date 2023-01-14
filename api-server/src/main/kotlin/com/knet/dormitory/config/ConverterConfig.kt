@@ -2,7 +2,6 @@ package com.knet.dormitory.config
 
 import com.knet.dormitory.domain.notice.converter.NoticeReadConverter
 import com.knet.dormitory.domain.notice.converter.NoticeWriterConvertor
-import io.r2dbc.spi.ConnectionFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.convert.converter.Converter

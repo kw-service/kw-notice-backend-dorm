@@ -3,6 +3,7 @@ package com.knet.dormitory.config
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseOptions
+import com.google.firebase.messaging.FirebaseMessaging
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -15,11 +16,12 @@ class FirebaseConfig {
     lateinit var firebaseSecretKeyPath: String
 
     @Bean
-    fun firebaseApp(): FirebaseApp {
+    fun firebaseApp(): FirebaseMessaging {
         val serviceAccount = FileInputStream(firebaseSecretKeyPath)
         val options: FirebaseOptions = FirebaseOptions.builder()
             .setCredentials(GoogleCredentials.fromStream(serviceAccount))
             .build()
-        return FirebaseApp.initializeApp(options, "dormitory-notice")
+        val app = FirebaseApp.initializeApp(options, "dormitory-notice")
+        return FirebaseMessaging.getInstance(app);
     }
 }

@@ -2,7 +2,6 @@ package com.knet.dormitory.presentation
 
 import com.knet.dormitory.domain.notice.dto.NoticeResponseDTO
 import com.knet.dormitory.domain.notice.service.NoticeService
-import kotlinx.coroutines.reactor.awaitSingle
 import org.springframework.stereotype.Component
 import org.springframework.web.reactive.function.server.ServerResponse
 import org.springframework.web.reactive.function.server.bodyValueAndAwait

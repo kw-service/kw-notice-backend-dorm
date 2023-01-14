@@ -1,15 +1,17 @@
 dependencies{
+    // reactor, webflux
     compileOnly("io.projectreactor.kotlin:reactor-kotlin-extensions")
+    compileOnly("org.springframework.boot:spring-boot-starter-webflux")
+
     compileOnly("org.jetbrains.kotlin:kotlin-reflect")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
     compileOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     compileOnly("org.springframework.boot:spring-boot-starter-data-r2dbc")
-    compileOnly("org.springframework.boot:spring-boot-starter-webflux")
 
     runtimeOnly("com.mysql:mysql-connector-j")
-    compileOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
-    compileOnly("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
+    runtimeOnly("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
+    runtimeOnly("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
 
 
     testCompileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
