@@ -1,27 +1,27 @@
 # Spring Webflux + Spring Batch (with Kotlin, Multi Module Project, Kotlin Gradle DSL)
 
-### purpose
+## Purpose
 - practice kotlin, coroutine
 - practice spring webflux
 - implement DDD in webflux
 
-### performance
+## Performance
 - show how implement multi module project with kotlin gradle DSL
 - show how to use r2dbc that make entity converter
 - monitoring dormitory notice per 1 min using spring batch
 
-### skill set
+## Skill Set
 
-#### language
+### Language
 - kotlin(+coroutine)
 
-#### backend
+### Backend
 - spring webflux
 - spring batch
 - firebase cloud messaging
 - spring data r2dbc(mysql, h2)
 
-### test
+### Test
 - mockk
 - coroutine-test
 - kotest
