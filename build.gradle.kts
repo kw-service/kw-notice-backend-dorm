@@ -9,8 +9,6 @@ plugins {
     kotlin("plugin.spring") version "1.7.22"
 }
 
-
-
 allprojects {
     apply{
         plugin("kotlin")
@@ -27,6 +25,19 @@ allprojects {
         mavenCentral()
     }
 
+    dependencies{
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
+        runtimeOnly("com.mysql:mysql-connector-j")
+        implementation("mysql:mysql-connector-java:8.0.30")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
+        testImplementation("io.mockk:mockk:1.13.2")
+        testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
+    }
+
     tasks.withType<KotlinCompile> {
         kotlinOptions {
             freeCompilerArgs = listOf("-Xjsr305=strict")
@@ -39,37 +50,6 @@ allprojects {
     }
 }
 
-dependencies {
-    implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
-    implementation("org.springframework.boot:spring-boot-starter-webflux")
-
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
-
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-    implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
-
-    runtimeOnly("com.mysql:mysql-connector-j")
-    implementation("mysql:mysql-connector-java:8.0.30")
-    implementation("dev.miku:r2dbc-mysql:0.8.2.RELEASE")
-    implementation("io.r2dbc:r2dbc-h2:1.0.0.RELEASE")
-
-    // test
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4")
-    testImplementation("io.mockk:mockk:1.13.2")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.projectreactor:reactor-test")
-    testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
-
-    // netty
-    implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
-
-    // firebase
-    implementation("com.google.firebase:firebase-admin:9.1.1")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-
-    implementation("org.springframework.boot:spring-boot-starter-web:3.0.1")
-    implementation("org.springframework.boot:spring-boot-starter-batch:3.0.1")
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+tasks.bootJar{
+    enabled = false
 }
