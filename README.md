@@ -10,6 +10,9 @@
 - show how to use r2dbc that make entity converter
 - monitoring dormitory notice per 1 min using spring batch
 
+## Structure
+![dormitory-notice](https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg)
+
 ## Skill Set
 
 ### Language
