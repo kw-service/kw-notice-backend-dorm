@@ -41,7 +41,12 @@ class AlarmHandler(
 
     suspend fun send(request: ServerRequest): ServerResponse {
         val dto = request.awaitBody(SendMessageRequestDTO::class)
-        alarmService.sendMessage(dto.title, dto.body, dto.topic)
+
+        val title = dto.title ?: throw IllegalStateException("there is no title")
+        val body = dto.body ?: throw IllegalStateException("there is no body")
+        val topic = dto.topic ?: throw IllegalStateException("there is no topic")
+
+        alarmService.sendMessage(title, body, topic)
 
         val res = CommonResponse(
             status = HttpStatus.OK,
