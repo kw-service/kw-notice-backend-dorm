@@ -12,8 +12,15 @@
 - Monitoring dormitory notice per 1 min using spring batch
 
 ## Structure
-#### version 1
-![dormitory-notice](https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg)
+#### Version 1
+> ![dormitory-notice](https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg)
+
+#### Version 2
+> ![dormitory-notice-v2](https://user-images.githubusercontent.com/73744183/212954729-c7a57a11-43c6-40cd-b584-5043b7d8290b.svg)
+
+#### Module Dependencies
+> ![dormitory-notice-dependency drawio](https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg)
+
 
 ## Skill Set
 
