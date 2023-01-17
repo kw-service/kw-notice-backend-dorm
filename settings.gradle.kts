@@ -1,6 +1,6 @@
 rootProject.name = "dormitory"
 
-val moduleNames = arrayListOf("batch-server", "api-server")
+val moduleNames = arrayListOf("batch-server", "api-server-webflux", "domain", "api-server-mvc")
 
 fun file(dir: File, name: String): File = file("${dir.absolutePath}/${name}")
 
