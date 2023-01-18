@@ -89,10 +89,10 @@ class DormitorySchedulingConfig(
         jobLauncher.run(dormitoryNoticeMonitoringJob(jobRepository, jpaTransactionManager), param)
     }
 
-    fun convertAlarmToNoticeTopic(topic: AlarmTopic): NoticeTopic = when {
-        topic == AlarmTopic.COMMON -> NoticeTopic.COMMON
-        topic == AlarmTopic.REFRIGERATOR -> NoticeTopic.REFRIGERATOR
-        topic == AlarmTopic.REGULAR_RECRUITMENT -> NoticeTopic.REGULAR_RECRUITMENT
+    fun convertAlarmToNoticeTopic(topic: AlarmTopic): NoticeTopic = when (topic) {
+        AlarmTopic.COMMON -> NoticeTopic.COMMON
+        AlarmTopic.REFRIGERATOR -> NoticeTopic.REFRIGERATOR
+        AlarmTopic.REGULAR_RECRUITMENT -> NoticeTopic.REGULAR_RECRUITMENT
         else -> NoticeTopic.COMMON
     }
 }

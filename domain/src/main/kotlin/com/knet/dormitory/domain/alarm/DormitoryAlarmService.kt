@@ -1,26 +1,35 @@
 package com.knet.dormitory.domain.alarm
 
-import com.knet.dormitory.domain.alarm.dto.DormitoryAlarmRequestDTO
+import com.google.firebase.messaging.AndroidConfig
+import com.google.firebase.messaging.AndroidNotification
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.Message
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
-import org.springframework.web.reactive.function.client.WebClient
 
 @Service
 class DormitoryAlarmService(
-    private val webClient: WebClient
+    private val firebaseMessaging: FirebaseMessaging
 ) : AlarmService {
     private val logger = LoggerFactory.getLogger(DormitoryAlarmService::class.java)
 
-    private val BASE_URL = "http://localhost:8883"
-
     override fun sendMessage(title: String, body: String, topic: AlarmTopic) {
-        logger.info("start send message $title  : $body : $topic")
-        webClient.post()
-            .uri("${BASE_URL}/alarm/send")
-            .bodyValue(DormitoryAlarmRequestDTO(title, body, topic))
-            .retrieve()
-            .toEntity(String::class.java)
-            .onErrorContinue { _, _ -> logger.warn("Error send message {$title : $body}") }
-            .block()
+        val notification = AndroidNotification.builder()
+            .setChannelId("kw_dormitory_notice_id")
+            .setTitle(title)
+            .setBody(body)
+            .build()
+
+        val message = Message.builder()
+            .setAndroidConfig(
+                AndroidConfig.builder()
+                    .setPriority(AndroidConfig.Priority.HIGH)
+                    .setNotification(notification)
+                    .build()
+            )
+            .setTopic(topic.name)
+            .build()
+        firebaseMessaging.sendAsync(message)
+        logger.info("send message $message")
     }
 }
