@@ -48,9 +48,8 @@ class DormitorySchedulingConfig(
                     .filter { notice -> !noticeRepository.existsByInfoTitle(notice.title) }
                     .groupBy { notice ->
                         when {
-                            "냉장고" in notice.title -> AlarmTopic.REFRIGERATOR
-                            "상시 모집" in notice.title || "상시모집" in notice.title -> AlarmTopic.REGULAR_RECRUITMENT
-                            else -> AlarmTopic.COMMON
+                            "모집" in notice.title -> AlarmTopic.KW_DORM_RECRUITMENT
+                            else -> AlarmTopic.KW_DORM_COMMON
                         }
                     }.forEach {
                         logger.info(it.toString())
@@ -79,10 +78,10 @@ class DormitorySchedulingConfig(
 
     /**
      * execute job per 1 min for monitoring dormitory notice
-     * @author tiaena
+     * @author tianea
      */
-    @Scheduled(cron = "1/30 * * * * *")
-    fun test() {
+    @Scheduled(cron = "1 * * * * *")
+    fun dormScheduling() {
         val param = JobParametersBuilder()
             .addDate("date", Date())
             .toJobParameters()
@@ -90,9 +89,8 @@ class DormitorySchedulingConfig(
     }
 
     fun convertAlarmToNoticeTopic(topic: AlarmTopic): NoticeTopic = when (topic) {
-        AlarmTopic.COMMON -> NoticeTopic.COMMON
-        AlarmTopic.REFRIGERATOR -> NoticeTopic.REFRIGERATOR
-        AlarmTopic.REGULAR_RECRUITMENT -> NoticeTopic.REGULAR_RECRUITMENT
-        else -> NoticeTopic.COMMON
+        AlarmTopic.KW_DORM_COMMON -> NoticeTopic.KW_DORM_COMMON
+        AlarmTopic.KW_DORM_RECRUITMENT -> NoticeTopic.KW_DORM_RECRUITMENT
+        else -> NoticeTopic.KW_DORM_COMMON
     }
 }

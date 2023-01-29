@@ -17,7 +17,7 @@ class AlarmController(
 ) {
     @PostMapping("/test")
     fun test() {
-        alarmService.sendMessage("test title", "test body", AlarmTopic.COMMON)
+        alarmService.sendMessage("test title", "test body", AlarmTopic.KW_DORM_COMMON)
     }
 
     @PostMapping("/send")

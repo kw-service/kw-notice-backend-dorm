@@ -14,7 +14,7 @@ class Notice(
     title: String,
     writerName: String,
     writerId: String,
-    topic: NoticeTopic = NoticeTopic.COMMON,
+    topic: NoticeTopic = NoticeTopic.KW_DORM_COMMON,
     createdAt: LocalDate
 ) {
     @EmbeddedId
@@ -85,6 +85,6 @@ class NoticeInfo(title: String, createdAt: LocalDate) {
     override fun toString(): String = "NoticeInfo(title='$title', createdAt=$createdAt)"
 }
 
-enum class NoticeTopic {
-    COMMON, REFRIGERATOR, REGULAR_RECRUITMENT
+enum class NoticeTopic(val value: String) {
+    KW_DORM_COMMON("kw-dorm-common"), KW_DORM_RECRUITMENT("kw-dorm-recruitment");
 }

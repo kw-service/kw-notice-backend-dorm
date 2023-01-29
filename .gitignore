@@ -40,4 +40,5 @@ out/
 **/application-*.yml
 
 ### firebase secret key ###
-dormitory-notice-firebase-adminsdk.json
+**/fcm-key.json
+**/dormitory-notice-firebase-adminsdk.json

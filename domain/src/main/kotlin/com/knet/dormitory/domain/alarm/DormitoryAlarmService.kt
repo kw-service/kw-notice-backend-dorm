@@ -27,9 +27,9 @@ class DormitoryAlarmService(
                     .setNotification(notification)
                     .build()
             )
-            .setTopic(topic.name)
+            .setTopic(topic.value)
             .build()
         firebaseMessaging.sendAsync(message)
-        logger.info("send message $message")
+        logger.info("send message { title : ${title}, body : ${body}, topic : ${topic.value}}")
     }
 }
