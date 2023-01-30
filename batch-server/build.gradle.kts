@@ -1,7 +1,7 @@
 dependencies{
     implementation(project(":dormitory-domain"))
     implementation("org.springframework.boot:spring-boot-starter-batch:3.0.1")
-    compileOnly("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.1")
 }
 
 repositories {

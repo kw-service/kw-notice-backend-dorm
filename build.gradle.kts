@@ -26,14 +26,17 @@ allprojects {
     }
 
     dependencies{
-        implementation("org.jetbrains.kotlin:kotlin-reflect")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-        implementation("org.springframework.boot:spring-boot-starter-webflux")
-        implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final:osx-aarch_64")
-        runtimeOnly("com.mysql:mysql-connector-j")
+        implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22")
+
+        implementation("org.springframework.boot:spring-boot-starter-webflux:3.0.1")
+        testImplementation("org.springframework.boot:spring-boot-starter-test:3.0.1")
+
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
+        implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final")
+
+        runtimeOnly("com.mysql:mysql-connector-j:8.0.31")
         implementation("mysql:mysql-connector-java:8.0.30")
-        testImplementation("org.springframework.boot:spring-boot-starter-test")
         testImplementation("io.mockk:mockk:1.13.2")
         testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
     }
