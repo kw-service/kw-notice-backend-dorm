@@ -1,4 +1,4 @@
-# Spring Webflux + Spring Batch (with Kotlin, Multi Module Project, Kotlin Gradle DSL)
+# Spring MVC + Spring Batch (with Kotlin, Multi Module Project, Kotlin Gradle DSL)
 
 ## Purpose
 - Practice Kotlin
