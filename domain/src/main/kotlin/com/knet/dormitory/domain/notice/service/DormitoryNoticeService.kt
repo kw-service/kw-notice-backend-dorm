@@ -2,6 +2,7 @@ package com.knet.dormitory.domain.notice.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.knet.dormitory.domain.notice.Notice
+import com.knet.dormitory.domain.notice.dto.NoticeDetailDTO
 import com.knet.dormitory.domain.notice.dto.NoticeRootDTO
 import com.knet.dormitory.domain.notice.dto.NoticeShortDTO
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
@@ -66,5 +67,5 @@ class DormitoryNoticeService(
         return dto.root?.get(0)?.totalCount?.get(0)?.count
     }
 
-    override fun findAll(): List<Notice> = noticeRepository.findAll()
+    override fun findAll(): List<NoticeDetailDTO> = noticeRepository.findAll().map { notice -> NoticeDetailDTO.from(notice, DORMITORY_BASE_URL)}
 }

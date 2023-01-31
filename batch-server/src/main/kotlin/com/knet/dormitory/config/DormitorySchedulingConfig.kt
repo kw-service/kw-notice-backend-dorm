@@ -41,10 +41,12 @@ class DormitorySchedulingConfig(
     ): Job {
         val step = StepBuilder("test", jobRepository)
             .tasklet({ _, _ ->
-                val notices = noticeService.getNoticeList(page = 1, size = 20)
+                val notices = noticeService.getNoticeList(page = 1, size = noticeService.getNoticeTotalCount() ?: 0)
                     ?: return@tasklet RepeatStatus.CONTINUABLE
 
+
                 notices
+                    .reversed()
                     .filter { notice -> !noticeRepository.existsByInfoTitle(notice.title) }
                     .groupBy { notice ->
                         when {
@@ -55,10 +57,11 @@ class DormitorySchedulingConfig(
                         logger.info(it.toString())
                         it.value.map { dto ->
                             val entity = dto.toEntity()
-                            entity.id.generate()
                             entity.changeTopic(convertAlarmToNoticeTopic(it.key))
                             return@map entity
                         }.forEach { notice ->
+                            val id = noticeRepository.count()+1
+                            notice.id.generate(id)
                             noticeRepository.save(notice) // 값을 저장
                             alarmService.sendMessage(
                                 "새로운 공지사항이 올라왔습니다.",
