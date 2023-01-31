@@ -6,6 +6,7 @@ import com.knet.dormitory.domain.notice.dto.NoticeDetailDTO
 import com.knet.dormitory.domain.notice.dto.NoticeRootDTO
 import com.knet.dormitory.domain.notice.dto.NoticeShortDTO
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
+import org.springframework.data.domain.Sort
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
@@ -67,5 +68,7 @@ class DormitoryNoticeService(
         return dto.root?.get(0)?.totalCount?.get(0)?.count
     }
 
-    override fun findAll(): List<NoticeDetailDTO> = noticeRepository.findAll().map { notice -> NoticeDetailDTO.from(notice, DORMITORY_BASE_URL)}
+    override fun findAll(): List<NoticeDetailDTO> =
+        noticeRepository.findAllByOrderByInfoCreatedAtAsc()
+            .map { notice -> NoticeDetailDTO.from(notice, DORMITORY_BASE_URL) }
 }

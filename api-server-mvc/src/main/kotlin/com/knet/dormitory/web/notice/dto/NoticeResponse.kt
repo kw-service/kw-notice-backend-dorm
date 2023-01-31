@@ -16,8 +16,8 @@ class NoticeResponse(
     val createdAt: LocalDate
 ) {
     companion object {
-        fun from(dto: NoticeDetailDTO): NoticeResponse = NoticeResponse(
-            id = dto.noticeId.value ?: throw IllegalStateException("notice id 값이 존재해야합니다."),
+        fun from(dto: NoticeDetailDTO, id:Long): NoticeResponse = NoticeResponse(
+            id = id,
             title = dto.info.title,
             createdAt = dto.info.createdAt,
             writerId = dto.writer.id,

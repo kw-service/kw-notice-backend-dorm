@@ -41,7 +41,7 @@ class DormitorySchedulingConfig(
     ): Job {
         val step = StepBuilder("test", jobRepository)
             .tasklet({ _, _ ->
-                val notices = noticeService.getNoticeList(page = 1, size = noticeService.getNoticeTotalCount() ?: 0)
+                val notices = noticeService.getNoticeList(page = 1, size = 20)
                     ?: return@tasklet RepeatStatus.CONTINUABLE
 
 
@@ -60,8 +60,7 @@ class DormitorySchedulingConfig(
                             entity.changeTopic(convertAlarmToNoticeTopic(it.key))
                             return@map entity
                         }.forEach { notice ->
-                            val id = noticeRepository.count()+1
-                            notice.id.generate(id)
+                            notice.id.generate()
                             noticeRepository.save(notice) // 값을 저장
                             alarmService.sendMessage(
                                 "새로운 공지사항이 올라왔습니다.",
