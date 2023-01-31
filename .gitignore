@@ -42,3 +42,6 @@ out/
 ### firebase secret key ###
 **/fcm-key.json
 **/dormitory-notice-firebase-adminsdk.json
+
+### log file ###
+logs/**
