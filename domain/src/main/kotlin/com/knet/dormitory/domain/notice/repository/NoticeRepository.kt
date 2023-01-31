@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 interface NoticeRepository : JpaRepository<Notice, NoticeId> {
     fun findByInfoTitle(title: String): Notice?
     fun existsByInfoTitle(title: String): Boolean
+    fun findAllByOrderByInfoCreatedAtAsc(): List<Notice>
 }

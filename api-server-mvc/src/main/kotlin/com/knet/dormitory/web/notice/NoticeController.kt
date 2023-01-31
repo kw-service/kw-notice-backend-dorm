@@ -21,5 +21,6 @@ class NoticeController(
     @GetMapping("")
     @Operation(description = "기숙사 공지사항 리스트 조회 전체 조회")
     @ApiResponse(responseCode = "200", description = "성공 시")
-    fun findAll(): List<NoticeResponse> = noticeService.findAll().map { NoticeResponse.from(it) }
+    fun findAll(): List<NoticeResponse> =
+        noticeService.findAll().mapIndexed { index, dto -> NoticeResponse.from(dto, index.toLong() + 1) }
 }
