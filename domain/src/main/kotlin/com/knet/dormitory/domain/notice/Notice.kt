@@ -10,7 +10,7 @@ import java.util.*
 @Entity
 @Table(name = "notice")
 class Notice(
-    uuid: String? = null,
+    id: Long? = null,
     title: String,
     writerName: String,
     writerId: String,
@@ -18,7 +18,7 @@ class Notice(
     createdAt: LocalDate
 ) {
     @EmbeddedId
-    var id: NoticeId = NoticeId(uuid)
+    var id: NoticeId = NoticeId(id)
         private set
 
     @Embedded
@@ -53,23 +53,30 @@ class NoticeWriter(
 }
 
 @Embeddable
-class NoticeId(uuid: String? = null) : Serializable {
+class NoticeId(value: Long? = null) : Serializable {
     @Id
     @Column(name = "notice_id")
-    var uuid: String? = uuid
+    var value: Long? = value
         protected set
 
-    fun generate() = UUID.randomUUID().toString().also { uuid = it }
+    // @EmbeddedId는 자동생성 기능을 지원하지 않기 때문에 직접 업데이트를 해줘야합니다.
+    fun generate(value:Long){
+        this.value = value
+    }
+
+    override fun toString(): String {
+        return "NoticeId(value=$value)"
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as NoticeId
-        if (uuid != other.uuid) return false
+        if (value != other.value) return false
         return true
     }
 
-    override fun hashCode(): Int = uuid?.hashCode() ?: 0
-    override fun toString(): String = "NoticeId(uuid=$uuid)"
+    override fun hashCode(): Int = value?.hashCode() ?: 0
 }
 
 @Embeddable
