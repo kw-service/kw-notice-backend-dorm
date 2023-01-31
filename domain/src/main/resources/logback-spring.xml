@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+	<timestamp key="BY_DATE" datePattern="yyyy-MM-dd"/>
+	
+	<!-- 로그 출력 패턴 변수 -->
+	<property name="LOG_PATTERN"
+	          value="[%d{yyyy-MM-dd HH:mm:ss}:%-4relative] %green([%thread]) %highlight(%-5level) %boldWhite([%C.%M:%yellow([%L])) - %msg%n"/>
+	
+	<!--dev 프로필의 경우 로그 출력 방식-->
+	<springProfile name="dev">
+		<include resource="console-appender.xml"/>
+		<include resource="file-info-appender.xml"/>
+		<root level="INFO">
+			<appender-ref ref="FILE_INFO"/>
+			<appender-ref ref="CONSOLE"/>
+		</root>
+	</springProfile>
+	
+	<!--dev 프로필이 아닌 경우 로그 출력 방식-->
+	<springProfile name="!dev">
+		<include resource="console-appender.xml"/>
+		<root level="INFO">
+			<appender-ref ref="CONSOLE"/>
+		</root>
+	</springProfile>
+</configuration>
