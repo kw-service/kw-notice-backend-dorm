@@ -63,7 +63,7 @@ class DormitorySchedulingConfig(
                             notice.id.generate()
                             noticeRepository.save(notice) // 값을 저장
                             alarmService.sendMessage(
-                                "새로운 공지사항이 올라왔습니다.",
+                                it.key.message,
                                 notice.info.title,
                                 it.key
                             )// 새로운 공지사항이 올라왔다고 알림
