@@ -2,7 +2,7 @@
 FROM openjdk:17
 
 # jar 파일 옮기기
-COPY api-server-mvc/build/libs/*.jar app.jar
+COPY *.jar app.jar
 
 # 시크릿 파일 옮기기
 COPY fcm-key.json fcm-key.json

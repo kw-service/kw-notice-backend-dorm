@@ -45,3 +45,5 @@ out/
 
 ### log file ###
 logs/**
+
+db/data/**
