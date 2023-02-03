@@ -9,7 +9,8 @@
 - Show how implement multi module project with kotlin gradle DSL
 - Show how to use r2dbc that make entity converter
 - Show how to use JPA in Kotlin
-- Monitoring dormitory notice per 1 min using spring batch
+- Monitoring dormitory notice per 1 min using Spring Batch
+- Nondisruptive Deployment with Dockers Swarm
 
 ## Structure
 #### Version 1
@@ -21,6 +22,8 @@
 #### Module Dependencies
 > ![dormitory-notice-dependency drawio](https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg)
 
+#### Structure(with Docker Swarm)
+> ![dormitory-infrastructure](https://user-images.githubusercontent.com/73744183/216516244-806fbede-576d-4306-82b7-f66c89303886.png)
 
 ## Skill Set
 
