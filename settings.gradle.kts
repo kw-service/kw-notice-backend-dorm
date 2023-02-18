@@ -1,6 +1,6 @@
 rootProject.name = "dormitory"
 
-val moduleNames = arrayListOf("batch-server", "api-server-webflux", "domain", "api-server-mvc")
+val moduleNames = arrayListOf("web", "domain")
 
 fun file(dir: File, name: String): File = file("${dir.absolutePath}/${name}")
 
@@ -13,12 +13,16 @@ moduleNames.forEach { moduleName ->
     if (!moduleDir.exists()){ moduleDir.mkdirs()}
 
     // 하위 모듈에 build.gradle을 생성
-    val buildFile = file(moduleDir, "build.gradle.kts")
-    if (!buildFile.exists()){ buildFile.writeText(GRADLE_TEXT)}
+    moduleDir.listFiles().forEach {file ->
+        if(file.isDirectory){
+            val buildFile = file(file, "build.gradle.kts")
+            if (!buildFile.exists()){ buildFile.writeText(GRADLE_TEXT)}
 
-    val projectName = ":${rootProject.name}-${moduleDir.name}"
+            val projectName = ":${rootProject.name}-${moduleDir.name}-${file.name}"
 
-    // 새롭게 생성한 모듈을 include
-    include(projectName)
-    project(projectName).projectDir = moduleDir
+            // 새롭게 생성한 모듈을 include
+            include(projectName)
+            project(projectName).projectDir = file
+        }
+    }
 }
