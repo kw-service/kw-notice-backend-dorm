@@ -17,9 +17,9 @@ I started the project to solve the problem that I feel uncomfortable living in t
 </p>
 
 ## Purpose
-- Practice Kotlin
+- Practice Kotlin and Spring(with Kotlin)
 - Practice Spring Multi Module Project
-- Implement DDD in Spring JPA, R2DBC
+- Practice DDD in Spring JPA, R2DBC
 
 ## Performance
 - Show how implement multi module project with kotlin gradle DSL
