@@ -1,4 +1,20 @@
-# Spring MVC + Spring Batch (with Kotlin, Multi Module Project, Kotlin Gradle DSL)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/72238126/180598251-9c2a726d-6618-45d6-8565-633290d395fa.png"/>
+</p>
+
+<h1 align="center">KW 알리미 Dormitory Server</h1>
+
+<p align="center">
+<img src="https://img.shields.io/badge/kotlin-1.7.22-A97BFF.svg"/>
+<img src="https://img.shields.io/badge/gradle-7.6.1-5675DF.svg"/>
+<img src="https://img.shields.io/badge/spring boot-3.0.1-32A579.svg"/>
+<img src="https://img.shields.io/badge/license-Apache2.0-brightgreen.svg"/>
+</p>
+
+<p align="center">
+This is a server that is monitoring university dormitory notices, using Spring MVC + Spring Batch(with Kotlin, Multi Module Project, Kotlin Gradle DSL).<br/>
+I started the project to solve the problem that I feel uncomfortable living in the dormitory.
+</p>
 
 ## Purpose
 - Practice Kotlin
