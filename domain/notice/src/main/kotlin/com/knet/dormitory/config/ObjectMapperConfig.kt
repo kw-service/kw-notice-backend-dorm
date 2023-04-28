@@ -25,6 +25,7 @@ class ObjectMapperConfig {
                 .configure(KotlinFeature.StrictNullChecks, false)
                 .build()
         )
+        objectMapper.registerModule(JavaTimeModule())
         return objectMapper
     }
 }

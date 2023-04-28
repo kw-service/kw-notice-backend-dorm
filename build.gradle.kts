@@ -36,6 +36,7 @@ allprojects {
         testImplementation("org.springframework.boot:spring-boot-starter-test:3.0.1")
 
         implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
+        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1")
         implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final")
 
         runtimeOnly("com.mysql:mysql-connector-j:8.0.31")
