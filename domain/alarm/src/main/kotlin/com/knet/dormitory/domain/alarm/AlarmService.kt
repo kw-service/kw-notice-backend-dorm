@@ -13,7 +13,7 @@ class AlarmService(
 )  {
     private val logger = LoggerFactory.getLogger(AlarmService::class.java)
 
-     fun sendMessage(title: String, body: String, topic: AlarmTopic) {
+     suspend fun sendMessage(title: String, body: String, topic: AlarmTopic) {
         val notification = AndroidNotification.builder()
             .setChannelId("kw_dormitory_notice_id")
             .setTitle(title)

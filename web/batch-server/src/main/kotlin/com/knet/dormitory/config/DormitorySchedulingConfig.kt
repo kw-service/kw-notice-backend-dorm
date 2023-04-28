@@ -5,6 +5,8 @@ import com.knet.dormitory.domain.alarm.AlarmTopic
 import com.knet.dormitory.domain.notice.entity.NoticeTopic
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
 import com.knet.dormitory.domain.notice.service.NoticeService
+import kotlinx.coroutines.*
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.batch.core.Job
 import org.springframework.batch.core.JobParametersBuilder
@@ -31,50 +33,69 @@ class DormitorySchedulingConfig(
     private val noticeRepository: NoticeRepository,
     private val jobLauncher: JobLauncher,
     private val jobRepository: JobRepository,
-    private val alarmService: AlarmService
+    private val alarmService: AlarmService,
+    private val transactionManager: PlatformTransactionManager,
 ) {
-    private val logger = LoggerFactory.getLogger(DormitorySchedulingConfig::class.java)
     private val RECRUIT = "모집"
+    private val logger = getLogger<DormitorySchedulingConfig>()
+
     @Bean
-    fun dormitoryNoticeMonitoringJob(
+    fun monitoringJob(
         jobRepository: JobRepository,
         transactionManager: PlatformTransactionManager
     ): Job = job(jobRepository) {
         tasklet(jobRepository, transactionManager) { _, _ ->
-            noticeService.getNoticeList(page = 1, size = 20)
-                .reversed()
+            val dtos = noticeService.getNoticeList(page = 1, size = 20)
                 .filter { notice -> !noticeRepository.existsByInfoTitle(notice.title) }
-                .groupBy { notice ->
-                    when (RECRUIT) {
-                        in notice.title -> AlarmTopic.KW_DORM_RECRUITMENT
-                        else -> AlarmTopic.KW_DORM_COMMON
-                    }
-                }.forEach {
-                    logger.info(it.toString())
-                    it.value.map { dto ->
-                        val entity = dto.toEntity()
-                        entity.changeTopic(convertAlarmToNoticeTopic(it.key))
-                        return@map entity
-                    }.forEach { notice ->
-                        notice.id.generate()
-                        noticeRepository.save(notice) // 값을 저장
-                        alarmService.sendMessage(
-                            it.key.message,
-                            notice.info.title,
-                            it.key
-                        )// 새로운 공지사항이 올라왔다고 알림
+
+            val recruit = dtos.filter { notice -> RECRUIT in notice.title }.map { dto ->
+                dto.toEntity().let { notice ->
+                    notice.id.generate()
+                    notice.changeTopic(NoticeTopic.KW_DORM_RECRUITMENT)
+                    notice
+                }
+            }
+            val common = dtos.filter { notice -> RECRUIT !in notice.title }.map { dto ->
+                dto.toEntity().let { notice ->
+                    notice.id.generate()
+                    notice.changeTopic(NoticeTopic.KW_DORM_COMMON)
+                    notice
+                }
+            }
+            val notices = recruit + common
+            noticeRepository.saveAll(notices)
+            try {
+                runBlocking(Dispatchers.IO) {
+                    withTimeout(2000L) {
+                        val deferreds = mutableListOf<Deferred<Int>>()
+                        notices.forEachIndexed { i, notice ->
+                            val deferred = async {
+                                val topic = convertNoticeTopicToAlarmTopic(notice.topic)
+                                alarmService.sendMessage(
+                                    title = topic.message,
+                                    body = notice.info.title,
+                                    topic = topic
+                                )
+                                i
+                            }
+                            deferreds.add(deferred)
+                        }
+                        for (deferred in deferreds) deferred.await()
                     }
                 }
+            } catch (e: Exception) {
+                logger.error("send message error : ${e.message}")
+            }
             return@tasklet RepeatStatus.FINISHED
         }
     }
 
     @Scheduled(cron = "1 * * * * *")
-    fun dormScheduling(transactionManager: PlatformTransactionManager) {
+    fun dormScheduling() {
         val param = JobParametersBuilder()
             .addDate("date", Date())
             .toJobParameters()
-        jobLauncher.run(dormitoryNoticeMonitoringJob(jobRepository, transactionManager), param)
+        jobLauncher.run(monitoringJob(jobRepository, transactionManager), param)
     }
 
     fun convertAlarmToNoticeTopic(topic: AlarmTopic): NoticeTopic = when (topic) {
@@ -82,14 +103,22 @@ class DormitorySchedulingConfig(
         AlarmTopic.KW_DORM_RECRUITMENT -> NoticeTopic.KW_DORM_RECRUITMENT
         else -> NoticeTopic.KW_DORM_COMMON
     }
+
+    fun convertNoticeTopicToAlarmTopic(topic: NoticeTopic): AlarmTopic = when (topic) {
+        NoticeTopic.KW_DORM_COMMON -> AlarmTopic.KW_DORM_COMMON
+        NoticeTopic.KW_DORM_RECRUITMENT -> AlarmTopic.KW_DORM_RECRUITMENT
+        else -> AlarmTopic.KW_DORM_COMMON
+    }
 }
 
 private fun tasklet(
     jobRepository: JobRepository,
     transactionManager: PlatformTransactionManager,
     tasklet: Tasklet
-): Step = StepBuilder("test", jobRepository).tasklet(tasklet, transactionManager).build()
+): Step = StepBuilder("dormitory notice monitoring", jobRepository).tasklet(tasklet, transactionManager).build()
 
 private fun job(jobRepository: JobRepository, init: () -> Step): Job =
     JobBuilder("dormitory notice list job", jobRepository)
         .start(init()).build()
+
+inline fun <reified T> getLogger(): Logger = LoggerFactory.getLogger(T::class.java)

@@ -31,6 +31,7 @@ allprojects {
     dependencies {
         implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
         implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC")
 
         implementation("org.springframework.boot:spring-boot-starter-webflux:3.0.1")
         testImplementation("org.springframework.boot:spring-boot-starter-test:3.0.1")
