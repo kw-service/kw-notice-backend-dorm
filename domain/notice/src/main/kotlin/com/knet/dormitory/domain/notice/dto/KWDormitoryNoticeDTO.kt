@@ -2,7 +2,7 @@ package com.knet.dormitory.domain.notice.dto
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.knet.dormitory.domain.notice.Notice
+import com.knet.dormitory.domain.notice.entity.Notice
 import org.springframework.format.annotation.DateTimeFormat
 import java.time.LocalDate
 

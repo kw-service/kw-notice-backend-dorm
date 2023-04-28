@@ -1,6 +1,6 @@
 package com.knet.dormitory.domain.notice.dto
 
-import com.knet.dormitory.domain.notice.*
+import com.knet.dormitory.domain.notice.entity.*
 
 
 class NoticeDetailDTO(

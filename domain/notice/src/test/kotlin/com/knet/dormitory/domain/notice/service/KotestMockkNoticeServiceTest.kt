@@ -1,8 +1,8 @@
 package com.knet.dormitory.domain.notice.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.knet.dormitory.domain.notice.Notice
-import com.knet.dormitory.domain.notice.NoticeTopic
+import com.knet.dormitory.domain.notice.entity.Notice
+import com.knet.dormitory.domain.notice.entity.NoticeTopic
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.every
@@ -32,7 +32,7 @@ class KotestMockkNoticeServiceTest : BehaviorSpec({
         }
         every { noticeRepository.findAllByOrderByInfoCreatedAtAsc() } returns testNotices
 
-        val noticeService = DormitoryNoticeService(
+        val noticeService = NoticeService(
             webClient = webClient,
             objectMapper = objectMapper,
             noticeRepository = noticeRepository

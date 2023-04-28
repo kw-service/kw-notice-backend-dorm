@@ -1,4 +1,4 @@
-package com.knet.dormitory.domain.notice
+package com.knet.dormitory.domain.notice.entity
 
 import jakarta.persistence.*
 import org.springframework.data.annotation.Id
@@ -70,8 +70,7 @@ class NoticeId(value: String? = null) : Serializable {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
         other as NoticeId
-        if (value != other.value) return false
-        return true
+        return value == other.value
     }
 
     override fun hashCode(): Int = value?.hashCode() ?: 0

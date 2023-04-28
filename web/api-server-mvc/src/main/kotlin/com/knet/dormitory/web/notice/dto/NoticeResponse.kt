@@ -1,6 +1,6 @@
 package com.knet.dormitory.web.notice.dto
 
-import com.knet.dormitory.domain.notice.NoticeTopic
+import com.knet.dormitory.domain.notice.entity.NoticeTopic
 import com.knet.dormitory.domain.notice.dto.NoticeDetailDTO
 import java.time.LocalDate
 
@@ -15,7 +15,7 @@ class NoticeResponse(
     val createdAt: LocalDate
 ) {
     companion object {
-        fun from(dto: NoticeDetailDTO, id:Long): NoticeResponse = NoticeResponse(
+        fun from(dto: NoticeDetailDTO, id: Long): NoticeResponse = NoticeResponse(
             id = id,
             title = dto.info.title,
             createdAt = dto.info.createdAt,
@@ -27,5 +27,5 @@ class NoticeResponse(
     }
 
     override fun toString(): String =
-        "NoticeResponse(title='$title', writerId='$writerId', writerName='$writerName', createdAt=${createdAt.atStartOfDay()})"
+        "NoticeResponse(id=$id, title='$title', writerId='$writerId', writerName='$writerName', topic=$topic, url='$url', createdAt=$createdAt)"
 }
