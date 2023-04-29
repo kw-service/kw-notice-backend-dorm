@@ -10,7 +10,6 @@ import io.mockk.mockk
 class AlarmServiceTest: BehaviorSpec({
     val firebaseMessaging : FirebaseMessaging = mockk()
     val alarmService = AlarmService(firebaseMessaging)
-
     given("사용자에게 보낼 알림이 있을 때"){
         val title ="test title"
         val body = "test body"

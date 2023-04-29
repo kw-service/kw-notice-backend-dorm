@@ -10,6 +10,7 @@ plugins {
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
     kotlin("plugin.jpa") version "1.7.22"
+    jacoco
 }
 
 allprojects {
@@ -19,6 +20,14 @@ allprojects {
         plugin("org.springframework.boot")
         plugin("io.spring.dependency-management")
         plugin("org.jetbrains.kotlin.plugin.spring")
+        plugin("jacoco")
+    }
+
+    tasks.jacocoTestReport{
+        tasks.clean
+        reports{
+            html.outputLocation.set(file("$rootDir/build/reports/jacoco/html"))
+        }
     }
 
     group = "com.knet"
