@@ -5,6 +5,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 import com.knet.dormitory.domain.notice.dto.NoticeDetailDTO
 import com.knet.dormitory.domain.notice.dto.NoticeRootDTO
 import com.knet.dormitory.domain.notice.dto.NoticeShortDTO
+import com.knet.dormitory.domain.notice.entity.Notice
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
@@ -60,4 +61,8 @@ class NoticeService(
     fun findAll(): List<NoticeDetailDTO> =
         noticeRepository.findAllByOrderByInfoCreatedAtAsc()
             .map { notice -> NoticeDetailDTO.from(notice, DORMITORY_BASE_URL) }
+
+    fun createNoticeAll(notices: List<Notice>): List<Notice> = noticeRepository.saveAll(notices)
+
+    fun isExistNoticeBy(title: String) = noticeRepository.existsByInfoTitle(title)
 }
