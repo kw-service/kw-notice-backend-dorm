@@ -4,7 +4,6 @@ import com.google.firebase.messaging.AndroidConfig
 import com.google.firebase.messaging.AndroidNotification
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
-import kotlinx.coroutines.delay
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
