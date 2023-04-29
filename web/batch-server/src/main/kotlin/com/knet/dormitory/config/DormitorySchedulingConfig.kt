@@ -31,9 +31,9 @@ import java.util.*
 class DormitorySchedulingConfig(
     private val noticeService: NoticeService,
     private val noticeRepository: NoticeRepository,
+    private val alarmService: AlarmService,
     private val jobLauncher: JobLauncher,
     private val jobRepository: JobRepository,
-    private val alarmService: AlarmService,
     private val transactionManager: PlatformTransactionManager,
 ) {
     private val RECRUIT = "모집"
@@ -67,8 +67,8 @@ class DormitorySchedulingConfig(
             try {
                 runBlocking(Dispatchers.IO) {
                     withTimeout(2000L) {
-                        val deferreds = mutableListOf<Deferred<Int>>()
-                        notices.forEachIndexed { i, notice ->
+                        val deferreds = mutableListOf<Deferred<Unit>>()
+                        notices.forEach { notice ->
                             val deferred = async {
                                 val topic = convertNoticeTopicToAlarmTopic(notice.topic)
                                 alarmService.sendMessage(
@@ -76,7 +76,6 @@ class DormitorySchedulingConfig(
                                     body = notice.info.title,
                                     topic = topic
                                 )
-                                i
                             }
                             deferreds.add(deferred)
                         }
