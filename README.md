@@ -17,41 +17,57 @@ I started the project to solve the problem that I feel uncomfortable living in t
 </p>
 
 ## Purpose
-- Practice Kotlin and Spring(with Kotlin)
-- Practice Spring Multi Module Project
-- Practice DDD in Spring JPA, R2DBC
+- To solve the problem that I feel uncomfortable living in the dormitory
+- To learn how to use Spring Batch, Spring JPA(with Kotlin)
+- To learn how to use Kotlin Gradle DSL
+- To learn Gradle multi-module project with Kotlin
 
 ## Performance
-- Show how implement multi module project with kotlin gradle DSL
-- Show how to use r2dbc that make entity converter
-- Show how to use JPA in Kotlin
+- Implement multi-module project with kotlin gradle DSL
+- Implement asynchronous logic with Kotlin coroutine to reduce time by up to 20x
+- Test code coverage using Jacoco is over 90 percent
 - Monitoring dormitory notice per 1 min using Spring Batch
-- Nondisruptive Deployment with Dockers Swarm
+- Use Docker Swarm to build nondisruptive servers that don't stop servers during updates
+
+## Process Flow
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/235336199-916794aa-dba7-4bd0-b152-4f5580f6416a.svg">
+</p>
 
 ## Structure
-#### Version 1
-> ![dormitory-notice](https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg)
+#### version 1
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg">
+</p>
 
-#### Version 2
-> ![dormitory-notice-v2](https://user-images.githubusercontent.com/73744183/212954729-c7a57a11-43c6-40cd-b584-5043b7d8290b.svg)
+#### version 2
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212954729-c7a57a11-43c6-40cd-b584-5043b7d8290b.svg">
+</p>
 
 #### Module Dependencies
-> ![dormitory-notice-dependency drawio](https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg">
+</p>
 
 #### Structure(with Docker Swarm)
-> ![dormitory-infrastructure](https://user-images.githubusercontent.com/73744183/216516244-806fbede-576d-4306-82b7-f66c89303886.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/216516244-806fbede-576d-4306-82b7-f66c89303886.png">
+</p>
 
 ## Skill Set
 
 ### Language
-- kotlin(+coroutine)
+- Kotlin(+Coroutine)
 
 ### Backend
 - Spring MVC
 - Spring Batch
-- Firebase Cloud Messaging
 - Spring Data JPA(mysql, h2)
-- Spring Webflux + R2DBC(abandon further development because batch system does not provide asynchronous)
+- Spring Webflux(for webclient)
+
+### Third-Party
+- Firebase Cloud Messaging
 
 ### Infrastructure
 - MySQL, H2
