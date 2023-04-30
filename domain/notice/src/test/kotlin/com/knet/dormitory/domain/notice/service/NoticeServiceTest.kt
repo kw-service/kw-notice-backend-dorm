@@ -7,6 +7,7 @@ import com.fasterxml.jackson.module.kotlin.KotlinModule
 import com.knet.dormitory.domain.notice.entity.Notice
 import com.knet.dormitory.domain.notice.entity.NoticeTopic
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
+import com.knet.dormitory.domain.provider.NoticeIdentityProvider
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.shouldNotBe
@@ -17,6 +18,7 @@ import java.time.LocalDate
 
 class NoticeServiceTest : BehaviorSpec({
     val noticeRepository = mockk<NoticeRepository>()
+    val provider = mockk<NoticeIdentityProvider>()
     val mapper = ObjectMapper()
     mapper.registerModule(
         KotlinModule.Builder()
@@ -30,7 +32,12 @@ class NoticeServiceTest : BehaviorSpec({
     )
     mapper.registerModule(JavaTimeModule())
     val client = WebClient.create()
-    val noticeService = NoticeService(noticeRepository = noticeRepository, objectMapper = mapper, webClient = client)
+    val noticeService = NoticeService(
+        noticeRepository = noticeRepository,
+        objectMapper = mapper,
+        webClient = client,
+        provider = provider
+    )
 
     given("공지사항이 20개 있을때") {
         val notices = mutableListOf<Notice>()

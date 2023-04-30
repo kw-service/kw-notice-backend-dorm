@@ -1,6 +1,7 @@
 package com.knet.batch.config
 
 import com.knet.dormitory.domain.alarm.AlarmService
+import com.knet.dormitory.domain.notice.dto.NoticeCreateDTO
 import com.knet.dormitory.domain.notice.dto.NoticeShortDTO
 import com.knet.dormitory.domain.notice.entity.Notice
 import com.knet.dormitory.domain.notice.service.NoticeService
@@ -32,7 +33,7 @@ class MonitoringTaskletTest: BehaviorSpec({
                 every { noticeService.isExistNoticeBy("title$i") } returns true
             for (i in 17 until 20)
                 every { noticeService.isExistNoticeBy("title$i") } returns false
-            every { noticeService.createNoticeAll(any<List<Notice>>()) } returns emptyList()
+            every { noticeService.createNoticeAll(any<List<NoticeCreateDTO>>()) } returns emptyList()
             coEvery { alarmService.sendMessage(any(), any(), any()) } returns Unit
 
             tasklet.filteringAndSendMessage()

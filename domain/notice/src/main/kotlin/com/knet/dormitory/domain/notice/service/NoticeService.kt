@@ -2,11 +2,13 @@ package com.knet.dormitory.domain.notice.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
+import com.knet.dormitory.domain.notice.dto.NoticeCreateDTO
 import com.knet.dormitory.domain.notice.dto.NoticeDetailDTO
 import com.knet.dormitory.domain.notice.dto.NoticeRootDTO
 import com.knet.dormitory.domain.notice.dto.NoticeShortDTO
 import com.knet.dormitory.domain.notice.entity.Notice
 import com.knet.dormitory.domain.notice.repository.NoticeRepository
+import com.knet.dormitory.domain.provider.NoticeIdentityProvider
 import org.springframework.http.MediaType
 import org.springframework.stereotype.Service
 import org.springframework.web.reactive.function.BodyInserters
@@ -16,6 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient
 class NoticeService(
     private val webClient: WebClient,
     private val objectMapper: ObjectMapper,
+    private val provider: NoticeIdentityProvider,
     private val noticeRepository: NoticeRepository
 ) {
     private val DORMITORY_BASE_URL = "https://kw.happydorm.or.kr"
@@ -62,7 +65,9 @@ class NoticeService(
         noticeRepository.findAllByOrderByInfoCreatedAtAsc()
             .map { notice -> NoticeDetailDTO.from(notice, DORMITORY_BASE_URL) }
 
-    fun createNoticeAll(notices: List<Notice>): List<Notice> = noticeRepository.saveAll(notices)
+    fun createNoticeAll(notices: List<NoticeCreateDTO>): List<Notice> = noticeRepository.saveAll(notices.map { dto ->
+        dto.toEntity(id = provider.generateId())
+    })
 
     fun isExistNoticeBy(title: String) = noticeRepository.existsByInfoTitle(title)
 }

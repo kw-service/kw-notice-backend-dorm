@@ -37,18 +37,14 @@ class MonitoringTasklet(
         val dtos = noticeService.getNoticeList(page = 1, size = 20)
             .filter { notice -> !noticeService.isExistNoticeBy(title = notice.title) }
 
-        val recruit = dtos.filter { notice -> RECRUIT in notice.title }.map { dto ->
-            dto.toEntity().apply {
-                id.generate()
-                changeTopic(NoticeTopic.KW_DORM_RECRUITMENT)
-            }
-        }
-        val common = dtos.filter { notice -> RECRUIT !in notice.title }.map { dto ->
-            dto.toEntity().apply {
-                id.generate()
-                changeTopic(NoticeTopic.KW_DORM_COMMON)
-            }
-        }
+        val recruit = dtos
+            .filter { notice -> RECRUIT in notice.title }
+            .map { dto -> dto.toCreateDTO(NoticeTopic.KW_DORM_RECRUITMENT) }
+
+        val common = dtos
+            .filter { notice -> RECRUIT !in notice.title }
+            .map { dto -> dto.toCreateDTO(NoticeTopic.KW_DORM_COMMON) }
+
         val notices = recruit + common
         noticeService.createNoticeAll(notices)
         try {
@@ -60,7 +56,7 @@ class MonitoringTasklet(
                             val topic = convertNoticeTopicToAlarmTopic(notice.topic)
                             alarmService.sendMessage(
                                 title = topic.message,
-                                body = notice.info.title,
+                                body = notice.title,
                                 topic = topic
                             )
                         }

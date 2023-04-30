@@ -5,11 +5,11 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 plugins {
-    id("org.springframework.boot") version "3.0.1"
+    id("org.springframework.boot") version "3.0.6"
     id("io.spring.dependency-management") version "1.1.0"
-    kotlin("jvm") version "1.7.22"
-    kotlin("plugin.spring") version "1.7.22"
-    kotlin("plugin.jpa") version "1.7.22"
+    kotlin("jvm") version "1.8.20"
+    kotlin("plugin.spring") version "1.8.20"
+    kotlin("plugin.jpa") version "1.8.20"
     jacoco
 }
 
@@ -38,19 +38,18 @@ allprojects {
     }
 
     dependencies {
-        implementation("org.jetbrains.kotlin:kotlin-reflect:1.7.22")
-        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.7.22")
-        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.0-RC")
+        implementation("org.jetbrains.kotlin:kotlin-reflect")
+        implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
 
-        implementation("org.springframework.boot:spring-boot-starter-webflux:3.0.1")
-        testImplementation("org.springframework.boot:spring-boot-starter-test:3.0.1")
+        implementation("org.springframework.boot:spring-boot-starter-webflux")
+        testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.14.1")
-        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.1")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+        implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
         implementation("io.netty:netty-resolver-dns-native-macos:4.1.68.Final")
 
-        runtimeOnly("com.mysql:mysql-connector-j:8.0.31")
-        implementation("mysql:mysql-connector-java:8.0.30")
+        implementation("com.mysql:mysql-connector-j:8.0.33")
         testImplementation("io.mockk:mockk:1.13.2")
         testImplementation("io.kotest:kotest-runner-junit5:5.5.4")
         testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.2")

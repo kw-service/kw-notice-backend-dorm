@@ -10,7 +10,7 @@ import java.util.*
 @Entity
 @Table(name = "notice")
 class Notice(
-    id: String? = null,
+    id: String,
     title: String,
     writerName: String,
     writerId: String,
@@ -53,10 +53,10 @@ class NoticeWriter(
 }
 
 @Embeddable
-class NoticeId(value: String? = null) : Serializable {
+class NoticeId(value: String) : Serializable {
     @Id
     @Column(name = "notice_id")
-    var value: String? = value
+    var value: String = value
         protected set
 
     // @EmbeddedId는 자동생성 기능을 지원하지 않기 때문에 직접 업데이트를 해줘야합니다.
@@ -73,7 +73,7 @@ class NoticeId(value: String? = null) : Serializable {
         return value == other.value
     }
 
-    override fun hashCode(): Int = value?.hashCode() ?: 0
+    override fun hashCode(): Int = value.hashCode() ?: 0
 }
 
 @Embeddable
