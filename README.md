@@ -5,9 +5,9 @@
 <h1 align="center">KW 알리미 Dormitory Server</h1>
 
 <p align="center">
-<img src="https://img.shields.io/badge/kotlin-1.7.22-A97BFF.svg"/>
+<img src="https://img.shields.io/badge/kotlin-1.8.20-A97BFF.svg"/>
 <img src="https://img.shields.io/badge/gradle-7.6.1-5675DF.svg"/>
-<img src="https://img.shields.io/badge/spring boot-3.0.1-32A579.svg"/>
+<img src="https://img.shields.io/badge/spring boot-3.0.6-32A579.svg"/>
 <img src="https://img.shields.io/badge/license-Apache2.0-brightgreen.svg"/>
 </p>
 
