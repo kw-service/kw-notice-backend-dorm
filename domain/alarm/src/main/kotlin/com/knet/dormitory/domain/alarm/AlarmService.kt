@@ -4,6 +4,7 @@ import com.google.firebase.messaging.AndroidConfig
 import com.google.firebase.messaging.AndroidNotification
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.Message
+import kotlinx.coroutines.withTimeout
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
@@ -13,7 +14,7 @@ class AlarmService(
 ) {
     private val logger = LoggerFactory.getLogger(AlarmService::class.java)
 
-    suspend fun sendMessage(title: String, body: String, topic: AlarmTopic) {
+    suspend fun sendMessage(title: String, body: String, topic: AlarmTopic) = withTimeout(2000L) {
         val notification = AndroidNotification.builder()
             .setChannelId("kw_dormitory_notice_id")
             .setTitle(title)
