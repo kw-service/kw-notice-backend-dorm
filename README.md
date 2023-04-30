@@ -23,7 +23,7 @@ I started the project to solve the problem that I feel uncomfortable living in t
 - To learn Gradle multi-module project with Kotlin
 
 ## Performance
-- implement multi-module project with kotlin gradle DSL
+- Implement multi-module project with kotlin gradle DSL
 - Implement asynchronous logic with Kotlin coroutine to reduce time by up to 20x
 - Test code coverage using Jacoco is over 90 percent
 - Monitoring dormitory notice per 1 min using Spring Batch
