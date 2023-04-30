@@ -17,16 +17,17 @@ I started the project to solve the problem that I feel uncomfortable living in t
 </p>
 
 ## Purpose
-- Practice Kotlin and Spring(with Kotlin)
-- Practice Spring Multi Module Project
-- Practice DDD in Spring JPA, R2DBC
+- To solve the problem that I feel uncomfortable living in the dormitory
+- To learn how to use Spring Batch, Spring JPA(with Kotlin)
+- To learn how to use Kotlin Gradle DSL
+- To learn Gradle multi-module project with Kotlin
 
 ## Performance
-- Show how implement multi module project with kotlin gradle DSL
-- Show how to use r2dbc that make entity converter
-- Show how to use JPA in Kotlin
+- implement multi-module project with kotlin gradle DSL
+- Implement asynchronous logic with Kotlin coroutine to reduce time by up to 20x
+- Test code coverage using Jacoco is over 90 percent
 - Monitoring dormitory notice per 1 min using Spring Batch
-- Nondisruptive Deployment with Dockers Swarm
+- Use Docker Swarm to build nondisruptive servers that don't stop servers during updates
 
 ## Structure
 #### Version 1
@@ -44,14 +45,16 @@ I started the project to solve the problem that I feel uncomfortable living in t
 ## Skill Set
 
 ### Language
-- kotlin(+coroutine)
+- Kotlin(+Coroutines
 
 ### Backend
 - Spring MVC
 - Spring Batch
-- Firebase Cloud Messaging
 - Spring Data JPA(mysql, h2)
-- Spring Webflux + R2DBC(abandon further development because batch system does not provide asynchronous)
+- Spring Webflux(for webclient)
+
+### Third-Party
+- Firebase Cloud Messaging
 
 ### Infrastructure
 - MySQL, H2
