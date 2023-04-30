@@ -49,7 +49,7 @@ class MonitoringTasklet(
         noticeService.createNoticeAll(notices)
         try {
             runBlocking(Dispatchers.IO) {
-                withTimeout(2000L) {
+
                     val deferreds = mutableListOf<Deferred<Unit>>()
                     notices.forEach { notice ->
                         val deferred = async {
@@ -64,7 +64,7 @@ class MonitoringTasklet(
                     }
                     for (deferred in deferreds) deferred.await()
                 }
-            }
+
         } catch (e: Exception) {
             logger.error("send message error : ${e.message}")
         }

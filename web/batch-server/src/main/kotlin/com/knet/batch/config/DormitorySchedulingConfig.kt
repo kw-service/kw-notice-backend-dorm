@@ -32,7 +32,7 @@ class DormitorySchedulingConfig(
         tasklet(jobRepository, transactionManager, monitoringTasklet)
     }
 
-    @Scheduled(cron = "1 * * * * *")
+    @Scheduled(cron = "0/10 * * * * *")
     fun dormScheduling() {
         val param = JobParametersBuilder()
             .addDate("date", Date())
