@@ -29,23 +29,36 @@ I started the project to solve the problem that I feel uncomfortable living in t
 - Monitoring dormitory notice per 1 min using Spring Batch
 - Use Docker Swarm to build nondisruptive servers that don't stop servers during updates
 
-## Structure
-#### Version 1
-> ![dormitory-notice](https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg)
+## Process Flow
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/235336199-916794aa-dba7-4bd0-b152-4f5580f6416a.svg">
+</p>
 
-#### Version 2
-> ![dormitory-notice-v2](https://user-images.githubusercontent.com/73744183/212954729-c7a57a11-43c6-40cd-b584-5043b7d8290b.svg)
+## Structure
+#### version 1
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212556467-e71ed18b-f069-4136-ae58-317baea7223d.svg">
+</p>
+
+#### version 2
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212954729-c7a57a11-43c6-40cd-b584-5043b7d8290b.svg">
+</p>
 
 #### Module Dependencies
-> ![dormitory-notice-dependency drawio](https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/212954872-c1c268dd-7ce4-4559-8236-b5be0df8898b.svg">
+</p>
 
 #### Structure(with Docker Swarm)
-> ![dormitory-infrastructure](https://user-images.githubusercontent.com/73744183/216516244-806fbede-576d-4306-82b7-f66c89303886.png)
+<p align="center">
+<img src="https://user-images.githubusercontent.com/73744183/216516244-806fbede-576d-4306-82b7-f66c89303886.png">
+</p>
 
 ## Skill Set
 
 ### Language
-- Kotlin(+Coroutines
+- Kotlin(+Coroutine)
 
 ### Backend
 - Spring MVC
